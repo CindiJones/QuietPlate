@@ -4,6 +4,7 @@ Quiet Plate is a calm, mobile-first web app for noticing food thoughts, tracking
 
 ## What is included
 
+- First-visit welcome page explaining the purpose, process, privacy, and safety positioning
 - Daily food-noise check-in
 - Six-question reflection assessment
 - Trigger and craving tracker
