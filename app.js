@@ -111,6 +111,7 @@ function routeTo(route) {
   if (route === "more") return openMoreMenu();
   const page = document.querySelector(`[data-page="${route}"]`);
   if (!page) return;
+  document.body.classList.toggle("welcome-mode", route === "welcome");
   document.querySelectorAll(".page").forEach(el => el.classList.remove("active"));
   page.classList.add("active");
   document.querySelectorAll("[data-route]").forEach(el => {
@@ -380,6 +381,7 @@ function openOnboarding() {
     saveState();
     setToday();
     closeModal();
+    routeTo("home");
   });
 }
 
@@ -519,6 +521,8 @@ document.addEventListener("keydown", event => {
   if (event.key === "Escape" && !document.getElementById("modal-backdrop").hidden) closeModal();
 });
 document.getElementById("quick-log").addEventListener("click", () => routeTo("track"));
+document.getElementById("welcome-begin").addEventListener("click", openOnboarding);
+document.getElementById("welcome-begin-bottom").addEventListener("click", openOnboarding);
 document.getElementById("assessment-button").addEventListener("click", openAssessment);
 document.getElementById("trigger-form").addEventListener("submit", handleTriggerSubmit);
 document.getElementById("clear-logs").addEventListener("click", () => {
@@ -546,5 +550,7 @@ document.getElementById("article-filters").addEventListener("click", event => {
 
 const initialRoute = location.hash.replace("#", "");
 renderAll();
-routeTo(document.querySelector(`[data-page="${initialRoute}"]`) ? initialRoute : "home");
-if (!state.onboarded) setTimeout(openOnboarding, 300);
+const startRoute = document.querySelector(`[data-page="${initialRoute}"]`)
+  ? initialRoute
+  : (state.onboarded ? "home" : "welcome");
+routeTo(startRoute);
