@@ -184,6 +184,23 @@ input[type="range"] { width: 100%; accent-color: var(--sage-deep); margin: 12px 
 .disclaimer h2 { margin: 3px 0 8px; }
 .disclaimer p { margin: 0; font-size: .86rem; color: #615b4d; }
 
+.pricing-layout { display: grid; gap: 16px; }
+.pricing-highlight { padding: 26px; background: linear-gradient(135deg, #edf3ee, #f9f6ef); }
+.pricing-highlight h2 { margin: 8px 0 8px; font-family: Georgia, serif; font-size: 1.8rem; font-weight: 500; }
+.pricing-highlight p { margin-bottom: 18px; }
+.pricing-list { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 10px; }
+.pricing-list li { display: flex; gap: 10px; color: var(--ink); font-size: .9rem; }
+.pricing-list span { width: 20px; height: 20px; border-radius: 50%; background: var(--sage); color: var(--sage-deep); display: grid; place-content: center; font-size: .65rem; flex: 0 0 20px; }
+.pricing-highlight small { display: block; margin-top: 12px; color: var(--sage-deep); font-size: .75rem; font-weight: 700; }
+.pricing-grid { display: grid; gap: 14px; }
+.plan-card-option { padding: 24px; position: relative; border: 1px solid var(--line); }
+.plan-card-option h2 { margin: 6px 0; font-family: Georgia, serif; font-size: 2.1rem; font-weight: 500; }
+.plan-card-option p { margin: 0 0 18px; font-size: .85rem; }
+.plan-frequency { color: var(--sage-deep); font-size: .68rem; font-weight: 800; letter-spacing: .14em; }
+.plan-badge { position: absolute; top: 14px; right: 14px; background: var(--ink); color: white; border-radius: 999px; padding: 5px 9px; font-size: .6rem; letter-spacing: .1em; font-weight: 800; }
+.plan-card-option.recommended { background: #f9faf7; }
+.plan-card-option.selected { border-color: #5a806e; box-shadow: 0 0 0 3px rgba(90, 128, 110, .15); }
+
 .bottom-nav { position: fixed; z-index: 10; bottom: 0; left: 0; right: 0; height: 72px; padding: 8px 7px calc(8px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.94); backdrop-filter: blur(16px); border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(5, 1fr); }
 .bottom-nav button { border: 0; background: transparent; font-size: .62rem; color: var(--muted); display: grid; justify-items: center; gap: 2px; cursor: pointer; }
 .bottom-nav button span { font-size: 1.16rem; }
@@ -297,6 +314,7 @@ input[type="range"] { width: 100%; accent-color: var(--sage-deep); margin: 12px 
   .welcome-features { grid-template-columns: repeat(3, 1fr); gap: 0 30px; }
   .welcome-safety { padding: 45px; }
   .welcome-footer { flex-direction: row; justify-content: space-between; }
+  .pricing-layout { grid-template-columns: 1.1fr .9fr; }
 }
 
 @media (min-width: 1020px) {

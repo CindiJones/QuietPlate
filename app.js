@@ -8,7 +8,11 @@ const defaultState = {
   logs: [],
   plan: {},
   reflection: null,
-  completedTools: []
+  completedTools: [],
+  billing: {
+    trialStartedAt: null,
+    plan: null
+  }
 };
 
 const tools = [
@@ -121,6 +125,67 @@ function routeTo(route) {
   window.scrollTo({ top: 0, behavior: "smooth" });
   if (route === "patterns") renderPatterns();
   if (route === "track") renderLogs();
+  if (route === "pricing") renderPricing();
+}
+
+function getTrialDaysRemaining() {
+  const start = state.billing?.trialStartedAt;
+  if (!start) return 7;
+  const trialMs = 7 * 24 * 60 * 60 * 1000;
+  const elapsedMs = Date.now() - new Date(start).getTime();
+  return Math.max(0, Math.ceil((trialMs - elapsedMs) / (24 * 60 * 60 * 1000)));
+}
+
+function renderPricing() {
+  const trialStatus = document.getElementById("trial-status");
+  const trialButton = document.getElementById("start-trial-button");
+  if (!trialStatus || !trialButton) return;
+
+  const plan = state.billing?.plan;
+  const daysRemaining = getTrialDaysRemaining();
+  const trialStarted = Boolean(state.billing?.trialStartedAt);
+
+  if (!trialStarted) {
+    trialStatus.textContent = "Trial not started yet.";
+    trialButton.disabled = false;
+    trialButton.textContent = "Start free trial";
+  } else if (daysRemaining > 0) {
+    trialStatus.textContent = `Free trial active: ${daysRemaining} day${daysRemaining === 1 ? "" : "s"} remaining.`;
+    trialButton.disabled = true;
+    trialButton.textContent = "Trial started";
+  } else {
+    trialStatus.textContent = "Free trial ended. Choose a plan below to continue.";
+    trialButton.disabled = true;
+    trialButton.textContent = "Trial complete";
+  }
+
+  document.querySelectorAll(".plan-card-option").forEach(card => {
+    card.classList.toggle("selected", card.dataset.plan === plan);
+  });
+}
+
+function startTrial() {
+  if (state.billing?.trialStartedAt) {
+    showToast("Your free trial is already active.");
+    return;
+  }
+  state.billing = {
+    ...(state.billing || {}),
+    trialStartedAt: new Date().toISOString()
+  };
+  saveState();
+  renderPricing();
+  showToast("7-day free trial started.");
+}
+
+function choosePlan(plan) {
+  state.billing = {
+    ...(state.billing || {}),
+    plan
+  };
+  saveState();
+  renderPricing();
+  showToast(plan === "weekly" ? "Weekly plan selected: $2.00/week." : "Monthly plan selected: $10.00/month.");
 }
 
 function setToday() {
@@ -390,6 +455,7 @@ function openMoreMenu() {
     <button data-modal-route="learn">□ &nbsp; Education library</button>
     <button data-modal-route="plan">✓ &nbsp; My Quiet Plan</button>
     <button data-modal-route="reflect">↻ &nbsp; Weekly reflection</button>
+    <button data-modal-route="pricing">$ &nbsp; Pricing</button>
     <button data-modal-route="support">♡ &nbsp; Support & resources</button>
   </div>`);
 }
@@ -482,6 +548,7 @@ function renderAll() {
   renderPatterns();
   renderTools();
   renderArticles();
+  renderPricing();
   loadPlan();
   renderReflection();
 }
@@ -546,6 +613,10 @@ document.getElementById("article-filters").addEventListener("click", event => {
   if (!button) return;
   document.querySelectorAll(".filter").forEach(item => item.classList.toggle("active", item === button));
   renderArticles(button.dataset.filter);
+});
+document.getElementById("start-trial-button").addEventListener("click", startTrial);
+document.querySelectorAll("[data-subscribe]").forEach(button => {
+  button.addEventListener("click", () => choosePlan(button.dataset.subscribe));
 });
 
 const initialRoute = location.hash.replace("#", "");

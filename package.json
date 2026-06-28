@@ -1,0 +1,29 @@
+{
+  "name": "quietplate",
+  "version": "1.0.0",
+  "description": "Quiet Plate is a calm, mobile-first web app for noticing food thoughts, tracking triggers, recognizing patterns, and trying short reset tools.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CindiJones/QuietPlate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CindiJones/QuietPlate/issues"
+  },
+  "homepage": "https://github.com/CindiJones/QuietPlate#readme",
+  "dependencies": {
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/ios": "^8.4.1",
+    "@capacitor/share": "^8.0.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.4.1"
+  }
+}
