@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f5f1">
+  <meta name="description" content="Quiet Plate — calm, practical tools for understanding food noise.">
+  <title>Quiet Plate</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#home" data-route="home" aria-label="Quiet Plate home">
+        <span class="brand-mark" aria-hidden="true">◒</span>
+        <span>Quiet Plate</span>
+      </a>
+      <nav class="side-nav">
+        <button class="nav-item active" data-route="home"><span>⌂</span> Today</button>
+        <button class="nav-item" data-route="track"><span>＋</span> Track</button>
+        <button class="nav-item" data-route="patterns"><span>⌁</span> Patterns</button>
+        <button class="nav-item" data-route="reset"><span>◌</span> Reset tools</button>
+        <button class="nav-item" data-route="learn"><span>□</span> Learn</button>
+        <button class="nav-item" data-route="plan"><span>✓</span> My plan</button>
+        <button class="nav-item" data-route="reflect"><span>↻</span> Reflect</button>
+        <button class="nav-item" data-route="support"><span>♡</span> Support</button>
+      </nav>
+      <div class="sidebar-note">
+        <span aria-hidden="true">✦</span>
+        <p>Small pauses can create meaningful change.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-brand" data-route="home" aria-label="Go home">
+          <span class="brand-mark">◒</span><strong>Quiet Plate</strong>
+        </button>
+        <div class="top-actions">
+          <button class="icon-button" id="export-button" aria-label="Print or save summary">⇧</button>
+          <button class="avatar" id="profile-button" aria-label="Open profile">Q</button>
+        </div>
+      </header>
+
+      <section class="page active" id="home-page" data-page="home">
+        <div class="hero">
+          <p class="eyebrow" id="today-label">TODAY</p>
+          <h1 id="greeting">A quieter moment starts here.</h1>
+          <p>Notice what is present. Choose what feels supportive.</p>
+        </div>
+
+        <div class="checkin-card card">
+          <div>
+            <span class="card-kicker">TODAY'S CHECK-IN</span>
+            <h2>How loud does food feel today?</h2>
+          </div>
+          <div class="noise-scale" role="radiogroup" aria-label="Food noise level">
+            <button data-checkin="1"><span>1</span><small>Quiet</small></button>
+            <button data-checkin="2"><span>2</span><small>Low</small></button>
+            <button data-checkin="3"><span>3</span><small>Present</small></button>
+            <button data-checkin="4"><span>4</span><small>Loud</small></button>
+            <button data-checkin="5"><span>5</span><small>Very loud</small></button>
+          </div>
+          <p class="checkin-response" id="checkin-response">Choose a number. There is no “good” score—just useful information.</p>
+        </div>
+
+        <div class="section-heading">
+          <div><span class="card-kicker">QUICK ACTIONS</span><h2>What would help right now?</h2></div>
+        </div>
+        <div class="quick-grid">
+          <button class="quick-card coral" id="quick-log">
+            <span class="quick-icon">＋</span><strong>Log a craving</strong><small>Capture the moment</small>
+          </button>
+          <button class="quick-card sage" data-route="reset">
+            <span class="quick-icon">◌</span><strong>Do a reset</strong><small>Pause for 90 seconds</small>
+          </button>
+          <button class="quick-card blue" data-route="learn">
+            <span class="quick-icon">□</span><strong>Learn</strong><small>Understand the pattern</small>
+          </button>
+          <button class="quick-card sand" data-route="reflect">
+            <span class="quick-icon">↻</span><strong>Reflect</strong><small>Check in with your week</small>
+          </button>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="card score-card">
+            <div class="card-title-row">
+              <div><span class="card-kicker">YOUR BASELINE</span><h2>Food Noise Score</h2></div>
+              <button class="text-button" id="assessment-button">Take assessment</button>
+            </div>
+            <div class="score-content" id="score-content">
+              <div class="score-orb"><strong>—</strong><span>Not set</span></div>
+              <p>A short reflection can help you understand where food thoughts are taking up space.</p>
+            </div>
+          </article>
+
+          <article class="card suggestion-card">
+            <span class="card-kicker">SUGGESTED FOR TODAY</span>
+            <div class="suggestion-icon">≈</div>
+            <h2 id="suggestion-title">The 90-second pause</h2>
+            <p id="suggestion-text">Give the urge a little space before deciding what you need.</p>
+            <button class="primary-button" data-tool="pause">Start this reset <span>→</span></button>
+          </article>
+
+          <article class="card recent-card">
+            <div class="card-title-row">
+              <div><span class="card-kicker">RECENT MOMENTS</span><h2>Your latest triggers</h2></div>
+              <button class="text-button" data-route="track">View all</button>
+            </div>
+            <div id="recent-logs" class="empty-state">
+              <span>○</span><p>No moments logged yet.</p><small>Tracking without judgment helps patterns emerge.</small>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="track-page" data-page="track">
+        <div class="page-intro"><span class="eyebrow">TRIGGER TRACKER</span><h1>Capture the moment, gently.</h1><p>A quick log can turn an automatic moment into useful information.</p></div>
+        <div class="two-column">
+          <form class="card form-card" id="trigger-form">
+            <div class="form-heading"><span class="step-dot">1</span><div><h2>What is happening?</h2><p>About one minute</p></div></div>
+            <label>Time of day
+              <select name="time" required>
+                <option>Morning</option><option>Afternoon</option><option>Evening</option><option>Late night</option>
+              </select>
+            </label>
+            <div class="range-field">
+              <div><label for="hunger">Physical hunger</label><output id="hunger-output">5 / 10</output></div>
+              <input type="range" id="hunger" name="hunger" min="1" max="10" value="5">
+              <div class="range-labels"><span>Not hungry</span><span>Very hungry</span></div>
+            </div>
+            <div class="range-field">
+              <div><label for="intensity">Craving intensity</label><output id="intensity-output">5 / 10</output></div>
+              <input type="range" id="intensity" name="intensity" min="1" max="10" value="5">
+              <div class="range-labels"><span>Faint</span><span>Very strong</span></div>
+            </div>
+            <fieldset>
+              <legend>What might be behind it?</legend>
+              <div class="chip-group" id="trigger-chips">
+                <label><input type="radio" name="trigger" value="Stress" required><span>Stress</span></label>
+                <label><input type="radio" name="trigger" value="Boredom"><span>Boredom</span></label>
+                <label><input type="radio" name="trigger" value="Fatigue"><span>Fatigue</span></label>
+                <label><input type="radio" name="trigger" value="Loneliness"><span>Loneliness</span></label>
+                <label><input type="radio" name="trigger" value="Habit"><span>Habit</span></label>
+                <label><input type="radio" name="trigger" value="Celebration"><span>Celebration</span></label>
+                <label><input type="radio" name="trigger" value="Reward"><span>Reward</span></label>
+                <label><input type="radio" name="trigger" value="Social pressure"><span>Social pressure</span></label>
+                <label><input type="radio" name="trigger" value="Restriction"><span>Restriction</span></label>
+                <label><input type="radio" name="trigger" value="Other"><span>Other</span></label>
+              </div>
+            </fieldset>
+            <label>What did you want?
+              <input type="text" name="wanted" placeholder="Something crunchy, a specific food…">
+            </label>
+            <label>What did you do?
+              <textarea name="action" rows="3" placeholder="Ate it, paused, chose something else…"></textarea>
+            </label>
+            <label>Did a strategy help?
+              <select name="helped"><option value="Not tried">I didn't try one</option><option value="Yes">Yes</option><option value="A little">A little</option><option value="No">Not this time</option></select>
+            </label>
+            <button class="primary-button full" type="submit">Save this moment</button>
+          </form>
+          <div>
+            <article class="card mini-insight">
+              <span class="card-kicker">A GENTLE REMINDER</span>
+              <blockquote>“A craving is information, not an instruction.”</blockquote>
+              <p>You do not need to make the “perfect” choice. The practice is simply noticing.</p>
+            </article>
+            <article class="card log-history">
+              <div class="card-title-row"><h2>Recent logs</h2><button class="text-button danger" id="clear-logs">Clear</button></div>
+              <div id="log-list" class="empty-state compact"><p>No logs yet.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="patterns-page" data-page="patterns">
+        <div class="page-intro"><span class="eyebrow">PATTERN RECOGNITION</span><h1>See the shape, not a verdict.</h1><p>Patterns are clues that can make the next choice feel easier.</p></div>
+        <div class="stat-grid" id="pattern-stats"></div>
+        <div class="two-column pattern-layout">
+          <article class="card">
+            <span class="card-kicker">TRIGGERS</span><h2>What shows up most</h2>
+            <div class="bar-chart" id="trigger-chart"></div>
+          </article>
+          <article class="card insight-panel">
+            <span class="card-kicker">WHAT WE NOTICE</span><h2>Your emerging insights</h2>
+            <div id="pattern-insights"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="reset-page" data-page="reset">
+        <div class="page-intro"><span class="eyebrow">RESET TOOLS</span><h1>Create a little space.</h1><p>Short practices for the moment between an urge and a choice. Most take under two minutes.</p></div>
+        <div class="tool-grid" id="tool-grid"></div>
+      </section>
+
+      <section class="page" id="learn-page" data-page="learn">
+        <div class="page-intro"><span class="eyebrow">LEARN</span><h1>Understanding makes room for choice.</h1><p>Short, practical reads—without rules, shame, or medical claims.</p></div>
+        <div class="filter-row" id="article-filters">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="basics">Basics</button>
+          <button class="filter" data-filter="patterns">Patterns</button>
+          <button class="filter" data-filter="support">Support</button>
+        </div>
+        <div class="article-grid" id="article-grid"></div>
+      </section>
+
+      <section class="page" id="plan-page" data-page="plan">
+        <div class="page-intro"><span class="eyebrow">MY QUIET PLAN</span><h1>Build support around real life.</h1><p>Choose a few ideas that feel realistic. A useful plan is flexible, not perfect.</p></div>
+        <form class="plan-grid" id="plan-form">
+          <article class="card plan-card"><span class="plan-number">01</span><h2>My top triggers</h2><p>What most often turns up the volume?</p><textarea name="triggers" rows="5" placeholder="Stressful afternoons, being overtired…"></textarea></article>
+          <article class="card plan-card"><span class="plan-number">02</span><h2>My reset strategies</h2><p>Which short tools feel most supportive?</p><textarea name="strategies" rows="5" placeholder="90-second pause, stepping outside…"></textarea></article>
+          <article class="card plan-card"><span class="plan-number">03</span><h2>Supportive meal habits</h2><p>What helps you feel steady and nourished?</p><textarea name="meals" rows="5" placeholder="Regular meals, enough protein and fibre…"></textarea></article>
+          <article class="card plan-card"><span class="plan-number">04</span><h2>Environment changes</h2><p>What could reduce friction or decision fatigue?</p><textarea name="environment" rows="5" placeholder="Plan easy snacks, make lunch decisions earlier…"></textarea></article>
+          <article class="card plan-card wide"><span class="plan-number">05</span><h2>When a craving feels very loud</h2><p>Write a kind, simple plan for a high-intensity moment.</p><textarea name="emergency" rows="4" placeholder="First I will pause and breathe. Then I will check what I need…"></textarea></article>
+          <div class="save-bar"><span id="plan-status">Changes save on this device.</span><button type="submit" class="primary-button">Save my plan</button></div>
+        </form>
+      </section>
+
+      <section class="page" id="reflect-page" data-page="reflect">
+        <div class="page-intro"><span class="eyebrow">WEEKLY REFLECTION</span><h1>Look back with curiosity.</h1><p>This is a chance to notice, not grade, your week.</p></div>
+        <div class="two-column">
+          <form class="card form-card" id="reflection-form">
+            <label>What triggered food noise most often this week?<textarea name="trigger" rows="3"></textarea></label>
+            <label>What helped?<textarea name="helped" rows="3"></textarea></label>
+            <label>What made it harder?<textarea name="harder" rows="3"></textarea></label>
+            <label>What is one small experiment for next week?<textarea name="improvement" rows="3"></textarea></label>
+            <label>What support might you need?<textarea name="support" rows="3"></textarea></label>
+            <button class="primary-button full" type="submit">Create weekly summary</button>
+          </form>
+          <article class="card reflection-summary" id="reflection-summary">
+            <div class="empty-state"><span>↻</span><h2>Your weekly summary</h2><p>Complete the reflection to gather your thoughts in one calm place.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="support-page" data-page="support">
+        <div class="page-intro"><span class="eyebrow">SUPPORT & RESOURCES</span><h1>You do not have to sort this out alone.</h1><p>Self-reflection can help, and sometimes human support is the most useful next step.</p></div>
+        <div class="support-grid">
+          <article class="card support-card"><span>◉</span><h2>Registered dietitian</h2><p>Can help with satisfying meal patterns, restriction, cravings, and individual nutrition needs. Look for someone with experience in eating behaviour or eating disorders.</p></article>
+          <article class="card support-card"><span>＋</span><h2>Physician</h2><p>Can explore health factors that may affect appetite or food thoughts and connect you with appropriate care.</p></article>
+          <article class="card support-card"><span>♡</span><h2>Therapist or counsellor</h2><p>Can support you with stress, emotions, compulsive patterns, body image, or the role food plays in coping.</p></article>
+          <article class="card support-card"><span>∞</span><h2>Eating disorder support</h2><p>If food thoughts feel distressing or connected to disordered eating, a local eating disorder organization can help you find specialized, compassionate support.</p></article>
+        </div>
+        <article class="disclaimer">
+          <div class="disclaimer-icon">i</div>
+          <div><h2>A note about this app</h2><p>This app provides educational and self-reflection tools only. It does not provide medical advice, diagnosis, or treatment. If your thoughts about food feel distressing, compulsive, or connected to disordered eating, please speak with a qualified health professional.</p></div>
+        </article>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Mobile navigation">
+      <button class="active" data-route="home"><span>⌂</span>Today</button>
+      <button data-route="track"><span>＋</span>Track</button>
+      <button data-route="reset"><span>◌</span>Reset</button>
+      <button data-route="patterns"><span>⌁</span>Patterns</button>
+      <button data-route="more"><span>•••</span>More</button>
+    </nav>
+  </div>
+
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
