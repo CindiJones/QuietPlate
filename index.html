@@ -23,6 +23,7 @@
         <button class="nav-item" data-route="learn"><span>□</span> Learn</button>
         <button class="nav-item" data-route="plan"><span>✓</span> My plan</button>
         <button class="nav-item" data-route="reflect"><span>↻</span> Reflect</button>
+        <button class="nav-item" data-route="pricing"><span>$</span> Pricing</button>
         <button class="nav-item" data-route="support"><span>♡</span> Support</button>
       </nav>
       <div class="sidebar-note">
@@ -341,13 +342,47 @@
           <div><h2>A note about this app</h2><p>This app provides educational and self-reflection tools only. It does not provide medical advice, diagnosis, or treatment. If your thoughts about food feel distressing, compulsive, or connected to disordered eating, please speak with a qualified health professional.</p></div>
         </article>
       </section>
+
+      <section class="page" id="pricing-page" data-page="pricing">
+        <div class="page-intro"><span class="eyebrow">PRICING</span><h1>Choose a plan that fits your pace.</h1><p>Start with a 7-day free trial, then continue with a weekly or monthly subscription.</p></div>
+        <div class="pricing-layout">
+          <article class="card pricing-highlight">
+            <span class="card-kicker">START HERE</span>
+            <h2>7-day free trial</h2>
+            <p>Try every Quiet Plate feature for a full week before billing begins.</p>
+            <ul class="pricing-list">
+              <li><span>✓</span> Full access to check-ins, patterns, and reset tools</li>
+              <li><span>✓</span> Cancel anytime before trial ends</li>
+              <li><span>✓</span> No commitment during trial period</li>
+            </ul>
+            <button class="primary-button" id="start-trial-button">Start free trial <span>→</span></button>
+            <small id="trial-status">Trial not started yet.</small>
+          </article>
+
+          <div class="pricing-grid">
+            <article class="card plan-card-option" data-plan="weekly">
+              <span class="plan-frequency">WEEKLY</span>
+              <h2>$2.00</h2>
+              <p>per week after trial</p>
+              <button class="primary-button full" data-subscribe="weekly">Choose weekly</button>
+            </article>
+            <article class="card plan-card-option recommended" data-plan="monthly">
+              <span class="plan-badge">BEST VALUE</span>
+              <span class="plan-frequency">MONTHLY</span>
+              <h2>$10.00</h2>
+              <p>per month after trial</p>
+              <button class="primary-button full" data-subscribe="monthly">Choose monthly</button>
+            </article>
+          </div>
+        </div>
+      </section>
     </main>
 
     <nav class="bottom-nav" aria-label="Mobile navigation">
       <button class="active" data-route="home"><span>⌂</span>Today</button>
       <button data-route="track"><span>＋</span>Track</button>
       <button data-route="reset"><span>◌</span>Reset</button>
-      <button data-route="patterns"><span>⌁</span>Patterns</button>
+      <button data-route="pricing"><span>$</span>Pricing</button>
       <button data-route="more"><span>•••</span>More</button>
     </nav>
   </div>
